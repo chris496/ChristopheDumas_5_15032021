@@ -5,3 +5,20 @@
 .jumbotron{
     background-color: #e7a8ee;
 }
+
+.card-shadow{
+    width: 18rem;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.card:hover{
+    border: orchid solid 3px;
+    transition: .1s linear;
+}
+
+.color{
+    background-color: rgba(236, 195, 215, 0.767);
+}
