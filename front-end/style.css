@@ -14,8 +14,8 @@ a:hover{
     text-decoration: none;
 }
 
-.card:hover{
-    border: orchid solid 3px;
+.selectCard:hover{
+    border: orchid solid 2px;
     transition: .1s linear;
 }
 
