@@ -177,3 +177,17 @@ fetch('http://127.0.0.1:3000/api/teddies/order', {
 
 
 */
+
+////////// somme des articles /////////
+
+function sum(){
+    const sum = JSON.parse(localStorage.getItem("article"))
+    let myTotal = 0     
+    for (let properties of sum){
+        myTotal += properties.price
+    }
+    return myTotal
+}
+
+document.getElementById("sumTeddies").innerHTML = sum() /100 + " " + "€";
+JSON.stringify(localStorage.setItem("sum", sum()/100))
