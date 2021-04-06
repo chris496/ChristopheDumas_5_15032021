@@ -22,3 +22,7 @@ a:hover{
 .color{
     background-color: rgba(236, 195, 215, 0.767);
 }
+
+input{
+    width: 2000px;
+}

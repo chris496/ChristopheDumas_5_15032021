@@ -2,7 +2,8 @@
 
 const urlPost = `http://127.0.0.1:3000/api/teddies/order`;
 const teddiesInLocalstorage = JSON.parse(localStorage.getItem("article"));
-
+const products = teddiesInLocalstorage
+console.log(products)
 
 
 ////////// Fonctions //////////
@@ -35,12 +36,13 @@ function addTeddiesInBasket(){
                     </div>
                 </div>
             </div>`
-            console.log(properties)
         }
     }
 }
 
 addTeddiesInBasket()
+
+// Evenement pour supprimer tout les articles
 
 const allDelete = document.getElementById("alldelete")
 const remove = document.getElementById("addToCart");
@@ -75,3 +77,103 @@ function deleteOneRow(deleteRow){
     console.log(array)
     localStorage.setItem("article", JSON.stringify(teddiesInLocalstorage));
 }*/
+
+////////// Validation formulaire avec regex //////////
+
+/*const form = document.getElementById("validForm");
+form.email.addEventListener('change', function(){
+    validEmail(this)
+})
+
+const validEmail = function(email){
+    const emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g')
+    let testEmail = emailRegExp.test(email.value)
+    if(testEmail == true){
+        document.getElementById("errorEmail").innerHTML = "adresse email valide"
+        return true
+    }else{
+        document.getElementById("errorEmail").innerHTML = "adresse email non valide"
+        return false
+    }
+}
+
+form.addEventListener('submit', function(e){
+    e.preventDefault()
+    if(validEmail(form.email)){
+        form.submit()
+        
+    }
+})*/
+
+/////////////////////////////////// a finir pour les autres champs ////////////////////////////////
+
+//let formData = new FormData(form)
+
+//console.log(formData)
+
+
+
+document.getElementById("buttonForm").addEventListener("click", function(e){
+e.preventDefault()
+
+const contact = {
+    lastName: document.getElementById("lastName").value,
+    firstName: document.getElementById("firstName").value,
+    email: document.getElementById("email").value,
+    address: document.getElementById("address").value,
+    city: document.getElementById("city").value
+    }
+
+    localStorage.setItem("contact", JSON.stringify(contact))
+    //console.log(formObject)
+
+    fetch('http://127.0.0.1:3000/api/teddies/order', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/json'
+    },
+    body: JSON.stringify ({contact, products})
+})
+.then(response => response.json())
+.then(response => localStorage.setItem("idCommande", JSON.stringify(response.orderId)));
+
+//document.location.href="./confirmation.html"
+
+})
+
+
+
+/*function test(){
+    window.location.href="./confirmation.html"
+}*/
+
+/*let contact = {
+    firstName: "jean",
+    lastName: "reyo",
+    address:"23 fesffs fsef ff",
+    city: "feurs",
+    email: "efsefe@fdf"
+}
+
+console.log(contact)
+
+let products = ["5be9c8541c9d440000665243"]
+
+console.log(products)
+
+//let commande = {contact: {}, products: []}
+
+fetch('http://127.0.0.1:3000/api/teddies/order', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/json'
+    },
+    body: JSON.stringify ({contact, products})
+})
+.then(response => response.json())
+.then(response => console.log(response));
+
+
+*/
