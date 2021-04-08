@@ -14,7 +14,7 @@ const teddieCard = document.getElementById("teddieCard")
 
 // Fonction fetch pour récupérer le contenu de l'API
 
-function getTeddies(){
+function getApi(){
     return fetch (urlApiId)
     .then(function(response){
         return response.json()
@@ -29,8 +29,8 @@ function getTeddies(){
 
 // Fonction pour afficher la carte peluche sélectionnée sur la page accueil
 
-async function displyOneTeddies(){
-    const teddies = await getTeddies()
+async function displayOneTeddies(){
+    const teddies = await getApi()
     teddieCard.innerHTML = 
         `<div class="card shadow">
             <img src="${teddies.imageUrl}" alt="peluche" class="card-img-top">
@@ -41,8 +41,7 @@ async function displyOneTeddies(){
                     <label for="color">Choix couleur :</label>
                     <select class="form-control col-6" id="color"></select>
             </div>
-                <p class="text-danger text-right">${teddies.price /100 + " " + "€"}</p>   
-                
+                <p class="text-danger text-right">${teddies.price /100 + " " + "€"}</p>              
             </div>
         </div>`
 }
@@ -50,19 +49,18 @@ async function displyOneTeddies(){
 // Fonction pour sélectionner la bonne couleur
 
 async function colors(){
-    const teddies = await getTeddies();
-    const colors = Object.values(teddies.colors)
-            
+    const teddies = await getApi();
+    const colors = Object.values(teddies.colors)   
         for (let properties of colors){
-            console.log(properties)
             document.getElementById("color").innerHTML += `<option>${properties}</option>`
         }
 }
 
+
 // Fonction pour ajouter l'article au panier (via localstorage)
 
-async function addToCart(e){
-    const teddies = await getTeddies();
+async function addToCart(){
+    const teddies = await getApi();
     let teddiesInLocalStorage = JSON.parse(localStorage.getItem("article"))
     if(teddiesInLocalStorage === null){
         teddiesInLocalStorage = []
@@ -73,20 +71,35 @@ async function addToCart(e){
     }
     teddiesInLocalStorage.push(teddies)
     localStorage.setItem("article", JSON.stringify(teddiesInLocalStorage))
+    alert("votre article vient d'être ajouté au panier")
 }
 
 // pour clic bouton ajout panier
 const buttonAddCart = document.getElementById("cart");
+if(buttonAddCart !== null){   
+}
 
 ////////// Evévenements //////////
 //Ajoute l'article au panier au clic sur le bouton "ajouter au panier"/
-
 document.getElementById("cart").addEventListener("click", addToCart);
+
+
+getApi()
+displayOneTeddies()
+colors()
+
+
+
+//document.getElementById("cart").addEventListener("click", addToCart);
 
 //const test = buttonAddCart.addEventListener("click", addToCart);
 //console.log(test)
 
-getTeddies()
-displyOneTeddies()
-colors()
+//document.getElementById("cart").addEventListener("click", addToCart);
+/*window.addEventListener("load", function startup() {
+    document.getElementById("cart").addEventListener("click", addToCart);
+});*/
 
+/*window.onload=function(){
+    document.getElementById("cart").addEventListener("click", addToCart);
+  }*/
