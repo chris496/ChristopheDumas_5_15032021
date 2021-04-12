@@ -80,70 +80,121 @@ JSON.stringify(localStorage.setItem("sum", sum()/100))
 
 document.getElementById("buttonForm").addEventListener("click", function postForm(e){
 e.preventDefault()
+if(validLastName(form.lastName) && validFirstName(form.firstName) && validEmail(form.email) && validAdress(form.address) && validCity(form.city)) {
     // récupération des champs du formulaire saisis par l'utilisateur
-const contact = {
-    lastName: document.getElementById("lastName").value,
-    firstName: document.getElementById("firstName").value,
-    email: document.getElementById("email").value,
-    address: document.getElementById("address").value,
-    city: document.getElementById("city").value
-    }
-    // envoi des informations dans le localstrorage
-    localStorage.setItem("contact", JSON.stringify(contact))
-    // envoi de la commande complète au serveur
-    fetch('http://127.0.0.1:3000/api/teddies/order', {
-    method: 'POST',
-    headers: {
-        'Accept': 'application/json',
-        'Content-type': 'application/json'
-    },
-    body: JSON.stringify ({contact, products})
-})
-.then(response => response.json())
-// récupération du retour d'info du serveur (id de commande) et envoi dans localstorage
-.then(response => localStorage.setItem("idCommande", JSON.stringify(response.orderId))
-);
-window.location.href='./confirmation.html'
+    const contact = {
+        lastName: document.getElementById("lastName").value,
+        firstName: document.getElementById("firstName").value,
+        email: document.getElementById("email").value,
+        address: document.getElementById("address").value,
+        city: document.getElementById("city").value
+        }
+        // envoi des informations dans le localstrorage
+        localStorage.setItem("contact", JSON.stringify(contact))
+        // envoi de la commande complète au serveur
+        fetch('http://127.0.0.1:3000/api/teddies/order', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify ({contact, products})
+    })
+    .then(response => response.json())
+    // récupération du retour d'info du serveur (id de commande) et envoi dans localstorage
+    .then(function(response) {
+        localStorage.setItem("idCommande", JSON.stringify(response.orderId))
+        window.location.href='./confirmation.html'
+    });
+  }
 })
 
 ////////// Validation formulaire avec regex //////////
 
-/*const form = document.getElementById("validForm");
-form.email.addEventListener('change', function(){
-    validEmail(this)
-})*/
+const form = document.getElementById("validForm");
 
-/*const validEmail = function(email){
-    const emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g')
-    let testEmail = emailRegExp.test(email.value)
-    if(testEmail == true){
-        document.getElementById("errorEmail").innerHTML = ""
-        return true
-    }else{
-        document.getElementById("errorEmail").innerHTML = "adresse email non valide"
-        return false
-    }
-}
+form.addEventListener('change', function(){
+    validLastName(lastName)
+    validFirstName(firstName)
+    validEmail(email)
+    validAdress(address)
+    validCity(city)
+})
 
-const validname = function(lastName){
+const validLastName = function(lastName){
     const nameRegExp = new RegExp('^[A-z- ]+$')
     let testname = nameRegExp.test(lastName.value)
     console.log(testname)
     if(testname == true){
-        document.getElementById("error").innerHTML = ""
+        document.getElementById("errorlastName").innerHTML = ""
         return true
     }else{
-        document.getElementById("error").innerHTML = "nom non valide"
+        document.getElementById("errorlastName").style.color = "red"
+        document.getElementById("errorlastName").innerHTML = "Nom non valide"
         return false
     }
 }
-const form = document.getElementById("validForm")
 
-form.addEventListener('submit', function(e){
-    e.preventDefault()
-    if(validname(form.lastName) && validEmail(form.email)) {
-      console.log("valide")
+const validFirstName = function(firstName){
+    const pnameRegExp = new RegExp('^[A-z- ]+$') 
+    let retestname = pnameRegExp.test(firstName.value)
+    console.log(retestname)
+    if(retestname == true){
+        document.getElementById("errorfirstName").innerHTML = ""
+        return true
+    }else{
+        document.getElementById("errorfirstName").style.color = "red"
+        document.getElementById("errorfirstName").innerHTML = "Prénom non valide"
+        return false
     }
+}
+
+const validEmail = function(email){
+    const emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g')
+    let testEmail = emailRegExp.test(email.value)
+    console.log(testEmail)
+    if(testEmail == true){
+        document.getElementById("errorEmail").innerHTML = ""
+        return true
+    }else{
+        document.getElementById("errorEmail").style.color = "red"
+        document.getElementById("errorEmail").innerHTML = "Adresse email non valide"
+        return false
+    }
+}
+
+const validAdress = function(address){
+    const nameRegExp = new RegExp('^[A-z- ]+$')
+    let testname = nameRegExp.test(address.value)
+    console.log(testname)
+    if(testname == true){
+        document.getElementById("erroraddress").innerHTML = ""
+        return true
+    }else{
+        document.getElementById("erroraddress").style.color = "red"
+        document.getElementById("erroraddress").innerHTML = "Adresse non valide"
+        return false
+    }
+}
+
+const validCity = function(city){
+    const nameRegExp = new RegExp('^[A-z- ]+$')
+    let testname = nameRegExp.test(city.value)
+    console.log(testname)
+    if(testname == true){
+        document.getElementById("errorcity").innerHTML = ""
+        return true
+    }else{
+        document.getElementById("errorcity").style.color = "red"
+        document.getElementById("errorcity").innerHTML = "Ville non valide"
+        return false
+    }
+}
+//const form = document.getElementById("validForm")
+
+/*form.addEventListener('submit', function(e){
+    e.preventDefault()
+    
 })*/
 
 /*const form = document.getElementById("validForm")
