@@ -26,7 +26,7 @@ async function displayTeddies(){
     teddiesCard.innerHTML = teddies.map(function(data){
         return `<div class="col-12 col-sm-6 col-lg-4 p-2" >
         <div class="card shadow selectCard">
-            <img src="${data.imageUrl}" alt="peluche" class="card-img-top" id="photo">
+            <img src="${data.imageUrl}" alt="peluche" class="card-img-top sizeteddies" id="photo">
             <div class="card-body">
                 <h5 class="card-title">${data.name}</h5>
                 <p class="card-text" id="description">${data.description}</p>
@@ -39,9 +39,6 @@ async function displayTeddies(){
         </div>`
     }).join('')
 };
-
-
-
 
 getApi();
 displayTeddies();

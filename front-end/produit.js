@@ -10,6 +10,10 @@ console.log(id)
 const urlApiId = `http://127.0.0.1:3000/api/teddies/${id}`
 const teddieCard = document.getElementById("teddieCard")
 
+////////// Evévenements //////////
+//Ajoute l'article au panier au clic sur le bouton "ajouter au panier"/
+document.getElementById("cart").addEventListener("click", addToCart);
+
 ////////// Fonctions //////////
 
 // Fonction fetch pour récupérer le contenu de l'API
@@ -60,9 +64,6 @@ async function colors(){
         })
 }
 
-
-
-
 // Fonction pour ajouter l'article au panier (via localstorage)
 
 async function addToCart(){
@@ -80,32 +81,6 @@ async function addToCart(){
     alert("votre article vient d'être ajouté au panier")
 }
 
-// pour clic bouton ajout panier
-const buttonAddCart = document.getElementById("cart");
-if(buttonAddCart !== null){   
-}
-
-////////// Evévenements //////////
-//Ajoute l'article au panier au clic sur le bouton "ajouter au panier"/
-document.getElementById("cart").addEventListener("click", addToCart);
-
-
 getApi()
 displayOneTeddies()
 colors()
-
-
-
-//document.getElementById("cart").addEventListener("click", addToCart);
-
-//const test = buttonAddCart.addEventListener("click", addToCart);
-//console.log(test)
-
-//document.getElementById("cart").addEventListener("click", addToCart);
-/*window.addEventListener("load", function startup() {
-    document.getElementById("cart").addEventListener("click", addToCart);
-});*/
-
-/*window.onload=function(){
-    document.getElementById("cart").addEventListener("click", addToCart);
-  }*/

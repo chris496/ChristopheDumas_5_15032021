@@ -47,7 +47,6 @@ const remove = document.getElementById("addToCart");
 
 allDelete.addEventListener("click", function alldelete(){
     localStorage.clear("article")
-    remove.remove()
     window.location.reload()
 })
 
@@ -80,6 +79,7 @@ JSON.stringify(localStorage.setItem("sum", sum()/100))
 
 document.getElementById("buttonForm").addEventListener("click", function postForm(e){
 e.preventDefault()
+// appel des fonctions pour validation formulaire 
 if(validLastName(form.lastName) && validFirstName(form.firstName) && validEmail(form.email) && validAdress(form.address) && validCity(form.city)) {
     // récupération des champs du formulaire saisis par l'utilisateur
     const contact = {
@@ -109,7 +109,7 @@ if(validLastName(form.lastName) && validFirstName(form.firstName) && validEmail(
   }
 })
 
-////////// Validation formulaire avec regex //////////
+////////// Validation formulaire avec expressions régulières //////////
 
 const form = document.getElementById("validForm");
 
@@ -124,9 +124,7 @@ form.addEventListener('change', function(){
 const validLastName = function(lastName){
     const nameRegExp = new RegExp('^[A-z- ]+$')
     let testname = nameRegExp.test(lastName.value)
-    console.log(testname)
     if(testname == true){
-        document.getElementById("errorlastName").innerHTML = ""
         return true
     }else{
         document.getElementById("errorlastName").style.color = "red"
@@ -136,11 +134,9 @@ const validLastName = function(lastName){
 }
 
 const validFirstName = function(firstName){
-    const pnameRegExp = new RegExp('^[A-z- ]+$') 
-    let retestname = pnameRegExp.test(firstName.value)
-    console.log(retestname)
-    if(retestname == true){
-        document.getElementById("errorfirstName").innerHTML = ""
+    const nameRegExp = new RegExp('^[A-z- ]+$') 
+    let testname = nameRegExp.test(firstName.value)
+    if(testname == true){
         return true
     }else{
         document.getElementById("errorfirstName").style.color = "red"
@@ -152,9 +148,7 @@ const validFirstName = function(firstName){
 const validEmail = function(email){
     const emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g')
     let testEmail = emailRegExp.test(email.value)
-    console.log(testEmail)
     if(testEmail == true){
-        document.getElementById("errorEmail").innerHTML = ""
         return true
     }else{
         document.getElementById("errorEmail").style.color = "red"
@@ -166,9 +160,7 @@ const validEmail = function(email){
 const validAdress = function(address){
     const nameRegExp = new RegExp('^[A-z- ]+$')
     let testname = nameRegExp.test(address.value)
-    console.log(testname)
     if(testname == true){
-        document.getElementById("erroraddress").innerHTML = ""
         return true
     }else{
         document.getElementById("erroraddress").style.color = "red"
@@ -180,9 +172,7 @@ const validAdress = function(address){
 const validCity = function(city){
     const nameRegExp = new RegExp('^[A-z- ]+$')
     let testname = nameRegExp.test(city.value)
-    console.log(testname)
     if(testname == true){
-        document.getElementById("errorcity").innerHTML = ""
         return true
     }else{
         document.getElementById("errorcity").style.color = "red"
@@ -190,53 +180,3 @@ const validCity = function(city){
         return false
     }
 }
-//const form = document.getElementById("validForm")
-
-/*form.addEventListener('submit', function(e){
-    e.preventDefault()
-    
-})*/
-
-/*const form = document.getElementById("validForm")
-const input = document.getElementById("lastName")
-const errorInput = document.getElementById("error")
-const regEx = /^[a-zA-Z-\s]+$/
-
-
-form.addEventListener('submit', function(event){
-    if (input.value == ""){
-        errorInput.innerHTML = "Votre nom est obligatoire";
-        event.preventDefault()
-    } else if (regEx.test(input.value) == false){
-        errorInput.innerHTML = "le nom doit comporter uniquement des lettres et des tirets";
-        event.preventDefault()
-    }
-})*/
-
-/////////////////////////////////// a finir pour les autres champs ////////////////////////////////
-
-
-
-
-/*let formvalid = document.getElementById("buttonForm")
-let lastname = document.getElementById("lastName")
-let misslastname = document.getElementById("error")
-let regex = /^[a-zA-Z-\s]+$/
-
-formvalid.addEventListener('click', validation)
-
-function validation(event){
-    if(lastname.validity.valueMissing){
-        event.preventDefault()
-        misslastname.textContent = 'no name'
-
-    }else if(regex.test(lastname.value) == false){
-        event.preventDefault()
-        misslastname.textContent = 'no word name'
-    }
-}*/
-
-/*const buttonDelete = document.getElementById("delete")
-const deleteRow = document.getElementById("deleteRow");
-let bg = document.querySelector("#deleteRow p")
-let btn = document.querySelectorAll("#yo")*/

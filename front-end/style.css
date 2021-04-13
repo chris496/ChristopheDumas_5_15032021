@@ -23,8 +23,14 @@ a:hover{
     background-color: rgba(236, 195, 215, 0.767);
 }
 
-input{
-    width: 2000px;
+.sizeteddies{
+    object-fit: cover;
+    height: 300px;
 }
 
-
+.bg{
+    background-color: rgba(245, 201, 235, 0.096);
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+}
