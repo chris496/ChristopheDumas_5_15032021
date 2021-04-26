@@ -8,4 +8,4 @@ Vous devrez avoir NodeJS et `npm` installés localement sur votre machine.
 
 exécuter la partie backend du projet (pour cela se positionner sur le dossier "back-end" et éxécuter npm start"),
 
-sur votre naviguateur éxécuter ce lien : http://127.0.0.1:5500/front-end/
+ensuite vous pouvez lancer index.html présent dans le dossier front-end
