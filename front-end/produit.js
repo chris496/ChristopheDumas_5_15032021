@@ -58,10 +58,6 @@ async function colors(){
         for (let properties of colors){
             document.getElementById("color").innerHTML += `<option>${properties}</option>`
         }
-        document.getElementById("color").addEventListener('change', function(){
-            let test = document.getElementById("color").options[document.getElementById("color").selectedIndex].text
-            console.log(test)
-        })
 }
 
 // Fonction pour ajouter l'article au panier (via localstorage)

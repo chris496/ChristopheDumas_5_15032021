@@ -9,7 +9,7 @@ const products = teddiesInLocalstorage
 // Fonction pour afficher les articles du panier
 
 function addTeddiesInBasket(){
-    if(teddiesInLocalstorage === null){
+    if(teddiesInLocalstorage === null || teddiesInLocalstorage.length === 0){
         document.getElementById("addToCart").innerHTML = `<div class="text-center"><p>Votre panier est vide</p></div>`
     }
     else{
@@ -23,7 +23,7 @@ function addTeddiesInBasket(){
                             <p class="ml-3" id="test">${properties.name}</p>
                         </div>
                         <div class="col text-center">
-                            <p id="yo">Black</p>
+                            <p>Black</p>
                         </div>
                         <div class="col text-center">
                             <p>${properties.price /100 + " " + "€"}</p>
@@ -53,8 +53,7 @@ allDelete.addEventListener("click", function alldelete(){
 // Evenement pour supprimer un article
 let btnsuppr = document.querySelectorAll("#deleteRow")
 for (let i=0; i<btnsuppr.length;i++){
-    btnsuppr[i].addEventListener("click", (e) =>{
-        e.preventDefault()
+    btnsuppr[i].addEventListener("click", () =>{
         teddiesInLocalstorage.splice(teddiesInLocalstorage.indexOf(teddiesInLocalstorage[i]),1)
         localStorage.setItem("article", JSON.stringify(teddiesInLocalstorage));  
         window.location.reload()
@@ -125,6 +124,7 @@ const validLastName = function(lastName){
     const nameRegExp = new RegExp('^[A-z- ]+$')
     let testname = nameRegExp.test(lastName.value)
     if(testname == true){
+        document.getElementById("errorlastName").innerHTML = ""
         return true
     }else{
         document.getElementById("errorlastName").style.color = "red"
@@ -137,6 +137,7 @@ const validFirstName = function(firstName){
     const nameRegExp = new RegExp('^[A-z- ]+$') 
     let testname = nameRegExp.test(firstName.value)
     if(testname == true){
+        document.getElementById("errorfirstName").innerHTML = ""
         return true
     }else{
         document.getElementById("errorfirstName").style.color = "red"
@@ -149,6 +150,7 @@ const validEmail = function(email){
     const emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g')
     let testEmail = emailRegExp.test(email.value)
     if(testEmail == true){
+        document.getElementById("errorEmail").innerHTML = ""
         return true
     }else{
         document.getElementById("errorEmail").style.color = "red"
@@ -158,9 +160,10 @@ const validEmail = function(email){
 }
 
 const validAdress = function(address){
-    const nameRegExp = new RegExp('^[A-z- ]+$')
+    const nameRegExp = new RegExp('^[A-z0-9-\'éèàç ]+$')
     let testname = nameRegExp.test(address.value)
     if(testname == true){
+        document.getElementById("erroraddress").innerHTML = ""
         return true
     }else{
         document.getElementById("erroraddress").style.color = "red"
@@ -173,6 +176,7 @@ const validCity = function(city){
     const nameRegExp = new RegExp('^[A-z- ]+$')
     let testname = nameRegExp.test(city.value)
     if(testname == true){
+        document.getElementById("errorcity").innerHTML = ""
         return true
     }else{
         document.getElementById("errorcity").style.color = "red"

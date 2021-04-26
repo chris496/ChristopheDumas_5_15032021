@@ -4,4 +4,5 @@ document.getElementById("sum").innerHTML = JSON.parse(localStorage.getItem("sum"
 
 document.getElementById("accueil").addEventListener("click", function(){
     localStorage.clear()
+    window.location.href='./index.html'
 })
